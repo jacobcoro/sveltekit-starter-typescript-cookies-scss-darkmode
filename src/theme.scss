@@ -1,2 +1,12 @@
 $primary: #795548;
 $secondary: #f5841f;
+$white: #fff;
+$black: #000000;
+$grey-8: #3a3a3a;
+
+$spacing: 8;
+
+@mixin card {
+	border-radius: 8px;
+	box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+}

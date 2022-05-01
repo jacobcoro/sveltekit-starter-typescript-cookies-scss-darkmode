@@ -1,23 +1,23 @@
 <script lang="ts">
 	export let value = '';
-	export let id;
-	export let label;
+	export let id = 'email';
+	export let label = '';
 	export let type = 'text';
-	export let name;
+	export let name = '';
 	export let required = false;
 
-	export let inputRef = null;
+	export let inputRef: HTMLElement | null = null;
 
-	function setType(node) {
+	function setType(node: any) {
 		node.type = type;
 	}
 </script>
 
 <div class={$$props.class}>
-	<label for={id} class="block text-sm font-medium text-gray-700">
+	<label for={id} class="input__label">
 		{label}
 	</label>
-	<div class="mt-1">
+	<div class="input__wrapper">
 		<input
 			use:setType
 			{name}
@@ -25,7 +25,17 @@
 			{required}
 			bind:value
 			bind:this={inputRef}
-			class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+			class="input__input"
 		/>
 	</div>
 </div>
+
+<style lang="scss">
+	@use 'src/theme';
+	.label {
+		color: 'grey';
+	}
+	.input__wrapper {
+		margin-left: theme.$spacing * 2px;
+	}
+</style>
