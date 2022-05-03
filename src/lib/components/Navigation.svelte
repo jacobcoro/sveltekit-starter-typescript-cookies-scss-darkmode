@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
-
+	import { sunO, moonO } from 'svelte-awesome/icons';
+	import Icon from 'svelte-awesome';
 	const navigation = [
 		{
 			href: '/',
@@ -12,6 +13,11 @@
 			name: `${$session.user ? '🔓' : '🔒'} Protected`
 		}
 	];
+	const handleThemeChange = () => {
+		const root = document.getElementById('app-root');
+		if (!root) return;
+		root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+	};
 
 	async function handleSignOut() {
 		await fetch('/api/sign-out');
@@ -22,6 +28,8 @@
 
 <header class="bg-indigo-600">
 	<nav class="container mx-auto">
+		<button on:click={handleThemeChange}> <Icon data={sunO} /></button>
+
 		<div class="w-full py-4 flex items-center justify-between">
 			<div class="flex items-center">
 				<div class="ml-10 space-x-8">
@@ -58,3 +66,6 @@
 		</div>
 	</nav>
 </header>
+
+<style>
+</style>

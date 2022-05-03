@@ -45,12 +45,10 @@
 </form>
 
 <style lang="scss">
-	@use 'src/theme';
-
 	.form {
-		@include theme.card;
-		margin: theme.$spacing * 4px;
-		padding: theme.$spacing * 4px;
+		@include style.card;
+		margin: style.$spacing * 4;
+		padding: style.$spacing * 4;
 	}
 	.error {
 		color: red;

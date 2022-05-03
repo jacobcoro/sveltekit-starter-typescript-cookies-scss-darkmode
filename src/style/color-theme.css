@@ -1,0 +1,21 @@
+/* Light Mode */
+:root[data-theme='light'] {
+	--primary: #f5841f;
+	--secondary: #795548;
+	--text: #000000;
+	--text-light: #3f3f3f;
+	--bg: #fafafa;
+	--grey-med: #878686;
+	--shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode */
+:root[data-theme='dark'] {
+	--primary: #f39a4d;
+	--secondary: #7f6258;
+	--text: #ffff;
+	--text-light: #bbbbbb;
+	--bg: #2c2c2c;
+	--grey-med: #878686;
+	--shadow: 3px 3px 15px rgba(0, 0, 0, 0.6);
+}

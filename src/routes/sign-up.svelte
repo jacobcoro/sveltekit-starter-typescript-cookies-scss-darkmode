@@ -33,4 +33,4 @@
 {#if error}
 	<p class="mt-3 text-red-500 text-center font-semibold">{error}</p>
 {/if}
-<SignUpForm class="max-w-xl mx-auto mt-8" on:submit={handleSubmit} />
+<SignUpForm on:submit={handleSubmit} />
