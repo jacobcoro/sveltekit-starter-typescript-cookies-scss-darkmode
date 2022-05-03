@@ -1,18 +1,21 @@
 <script lang="ts">
+	import '../style/reset.css';
+	import '../style/color-theme.css';
 	import Navigation from '$lib/components/Navigation.svelte';
 </script>
 
-<div id="main">
+<div class="main">
 	<Navigation />
-
-	<slot />
+	<div class="container">
+		<slot />
+	</div>
 </div>
 
-<style lang="scss" global>
-	@import 'src/style/reset';
-	@import 'src/style/color-theme';
-
-	#main {
+<style lang="scss">
+	.container {
+		@include style.container;
+	}
+	.main {
 		background-color: var(--bg);
 		height: 100%;
 		width: 100%;

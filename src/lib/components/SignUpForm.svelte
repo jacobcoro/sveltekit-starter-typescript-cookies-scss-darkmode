@@ -41,16 +41,16 @@
 	{#if error !== ''}
 		<p class="error">{error}</p>
 	{/if}
-	<Button type="submit">Sign Up</Button>
+	<div class="button-wrap">
+		<Button type="submit">Sign Up</Button>
+	</div>
 </form>
 
 <style lang="scss">
 	.form {
-		@include style.card;
-		margin: style.$spacing * 4;
-		padding: style.$spacing * 4;
+		@include style.login-form;
 	}
-	.error {
-		color: red;
+	.button-wrap {
+		margin-top: style.$spacing * 5;
 	}
 </style>

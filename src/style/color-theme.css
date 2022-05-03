@@ -5,6 +5,7 @@
 	--text: #000000;
 	--text-light: #3f3f3f;
 	--bg: #fafafa;
+	--paper: rgb(241, 241, 241);
 	--grey-med: #878686;
 	--shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
 }
@@ -16,6 +17,7 @@
 	--text: #ffff;
 	--text-light: #bbbbbb;
 	--bg: #2c2c2c;
+	--paper: #171717;
 	--grey-med: #878686;
 	--shadow: 3px 3px 15px rgba(0, 0, 0, 0.6);
 }

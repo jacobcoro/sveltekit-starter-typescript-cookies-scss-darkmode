@@ -29,8 +29,14 @@
 	}
 </script>
 
-<h1 class="text-2xl font-semibold text-center">Sign Up</h1>
+<h1 class="title">Sign Up</h1>
 {#if error}
-	<p class="mt-3 text-red-500 text-center font-semibold">{error}</p>
+	<p>{error}</p>
 {/if}
 <SignUpForm on:submit={handleSubmit} />
+
+<style lang="scss">
+	.title {
+		text-align: center;
+	}
+</style>

@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { sunO, moonO } from 'svelte-awesome/icons';
 	import Icon from 'svelte-awesome';
+	import { onMount } from 'svelte';
 	const navigation = [
 		{
 			href: '/',
@@ -13,10 +14,19 @@
 			name: `${$session.user ? '🔓' : '🔒'} Protected`
 		}
 	];
+	let theme = '';
+	onMount(() => {
+		const root = document.getElementById('app-root');
+		theme = root?.dataset.theme ?? 'light';
+		console.log({ theme, root });
+	});
 	const handleThemeChange = () => {
 		const root = document.getElementById('app-root');
+		console.log({ theme, root });
+
 		if (!root) return;
-		root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+		theme = root?.dataset.theme ?? 'light';
+		root.dataset.theme = theme === 'dark' ? 'light' : 'dark';
 	};
 
 	async function handleSignOut() {
@@ -26,46 +36,42 @@
 	}
 </script>
 
-<header class="bg-indigo-600">
-	<nav class="container mx-auto">
-		<button on:click={handleThemeChange}> <Icon data={sunO} /></button>
+<header class="navigation">
+	<nav>
+		<div class="nav__items">
+			<button on:click={handleThemeChange} class="theme-toggle">
+				<Icon data={sunO} />
+			</button>
 
-		<div class="w-full py-4 flex items-center justify-between">
-			<div class="flex items-center">
-				<div class="ml-10 space-x-8">
-					{#each navigation as link}
-						<a href={link.href} class="text-lg font-medium text-white hover:text-indigo-50">
-							{link.name}
-						</a>
-					{/each}
-				</div>
-			</div>
-			<div class="ml-10 space-x-4">
-				{#if $session.user}
-					<button
-						on:click={handleSignOut}
-						class="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75"
-					>
-						Sign out
-					</button>
-				{:else}
-					<a
-						href="/sign-in"
-						class="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75"
-					>
-						Sign in
-					</a>
-					<a
-						href="/sign-up"
-						class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50"
-					>
-						Sign up
-					</a>
-				{/if}
-			</div>
+			{#each navigation as link}
+				<a href={link.href}>
+					{link.name}
+				</a>
+			{/each}
+
+			{#if $session.user}
+				<button on:click={handleSignOut}> Sign out </button>
+			{:else}
+				<a href="/sign-in"> Sign in </a>
+				<a href="/sign-up"> Sign up </a>
+			{/if}
 		</div>
 	</nav>
 </header>
 
-<style>
+<style lang="scss">
+	.navigation {
+		background-color: var(--secondary);
+		padding: style.$spacing * 1;
+	}
+	a {
+		text-decoration: none;
+	}
+	.nav__items {
+		display: flex;
+		justify-content: space-around;
+	}
+	.theme-toggle {
+		color: var(--text);
+	}
 </style>

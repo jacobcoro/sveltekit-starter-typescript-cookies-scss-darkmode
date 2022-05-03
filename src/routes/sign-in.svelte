@@ -3,9 +3,13 @@
 	import { goto } from '$app/navigation';
 	import { session } from '$app/stores';
 
-	let error;
+	let error = '';
 
-	async function handleSubmit({ detail: { email, password } }) {
+	async function handleSubmit({
+		detail: { email, password }
+	}: {
+		detail: { email: string; password: string };
+	}) {
 		const response = await fetch('/api/sign-in', {
 			method: 'POST',
 			body: JSON.stringify({ email, password }),
@@ -25,8 +29,14 @@
 	}
 </script>
 
-<h1 class="text-2xl font-semibold text-center">Sign In</h1>
+<h1 class="title">Sign In</h1>
 {#if error}
 	<p class="mt-3 text-red-500 text-center font-semibold">{error}</p>
 {/if}
-<SignInForm class="max-w-xl mx-auto mt-8" on:submit={handleSubmit} />
+<SignInForm on:submit={handleSubmit} />
+
+<style lang="scss">
+	.title {
+		text-align: center;
+	}
+</style>

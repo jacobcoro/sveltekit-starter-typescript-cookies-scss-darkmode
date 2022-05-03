@@ -17,7 +17,7 @@
 	}
 </script>
 
-<form on:submit|preventDefault={submit} class="space-y-5 {$$props.class}">
+<form on:submit|preventDefault={submit} class="form">
 	<Input label="Email" id="email" name="email" type="email" bind:value={email} required />
 	<Input
 		label="Password"
@@ -27,8 +27,16 @@
 		bind:value={password}
 		required
 	/>
-	<Button type="submit">Sign In</Button>
+	<div class="button-wrap">
+		<Button type="submit">Sign In</Button>
+	</div>
 </form>
 
 <style lang="scss">
+	.form {
+		@include style.login-form;
+	}
+	.button-wrap {
+		margin-top: style.$spacing * 5;
+	}
 </style>

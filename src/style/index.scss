@@ -1,5 +1,9 @@
 $spacing: 8px;
 
+* {
+	color: var(--text);
+}
+
 @mixin card {
 	border-radius: 8px;
 	background-color: var(--paper);
@@ -7,8 +11,34 @@ $spacing: 8px;
 }
 @mixin button {
 	background-color: var(--primary);
-	border: 'none';
 	padding: 8 * 1px;
 	padding-left: 8 * 2px;
 	padding-right: 8 * 2px;
+	cursor: pointer;
+}
+
+@mixin input {
+	background-color: var(--bg);
+	border: none;
+	padding: $spacing * 1;
+	border-radius: 8px;
+}
+
+@mixin container {
+	max-width: 1080px;
+	padding: $spacing * 1;
+	@media screen and (min-width: 480px) {
+		padding: $spacing * 2;
+	}
+
+	margin: auto;
+}
+
+@mixin login-form {
+	@include card;
+	text-align: center;
+	width: 500px;
+	margin: auto;
+	margin-top: $spacing * 4;
+	padding: $spacing * 4;
 }

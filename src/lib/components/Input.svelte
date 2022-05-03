@@ -31,10 +31,13 @@
 </div>
 
 <style lang="scss">
-	.label {
-		color: 'grey';
+	input {
+		@include style.input;
+	}
+	.input__label {
+		color: var(--grey-med);
 	}
 	.input__wrapper {
-		margin-left: 8 * 2px;
+		margin: style.$spacing * 1;
 	}
 </style>
