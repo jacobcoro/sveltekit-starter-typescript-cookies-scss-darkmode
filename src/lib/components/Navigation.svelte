@@ -11,8 +11,8 @@
 			name: 'Home'
 		},
 		{
-			href: '/protected',
-			name: `${$session.user ? '🔓' : '🔒'} Protected`
+			href: '/app',
+			name: `App`
 		}
 	];
 
@@ -58,7 +58,8 @@
 		padding: style.$spacing * 1;
 	}
 
-	a {
+	a,
+	button {
 		color: white;
 		text-decoration: none;
 	}
@@ -69,6 +70,5 @@
 	.theme-toggle {
 		display: flex;
 		align-items: center;
-		color: white;
 	}
 </style>
