@@ -1,8 +1,8 @@
 import { createSession, getUserByEmail } from './_db';
 import { serialize } from 'cookie';
+import type { RequestHandler } from '@sveltejs/kit';
 
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function post({ request }) {
+export const post: RequestHandler = async ({ request }) => {
 	const { email, password } = await request.json();
 	const user = await getUserByEmail(email);
 
@@ -11,8 +11,8 @@ export async function post({ request }) {
 		return {
 			status: 401,
 			body: {
-				message: 'Incorrect user or password',
-			},
+				message: 'Incorrect user or password'
+			}
 		};
 	}
 
@@ -25,13 +25,13 @@ export async function post({ request }) {
 				httpOnly: true,
 				sameSite: 'strict',
 				secure: process.env.NODE_ENV === 'production',
-				maxAge: 60 * 60 * 24 * 7, // one week
-			}),
+				maxAge: 60 * 60 * 24 * 7 // one week
+			})
 		},
 		body: {
 			user: {
-				email,
-			},
-		},
+				email
+			}
+		}
 	};
-}
+};

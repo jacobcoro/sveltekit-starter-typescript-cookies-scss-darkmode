@@ -1,8 +1,8 @@
 import { removeSession } from './_db';
 import { parse, serialize } from 'cookie';
+import type { RequestHandler } from '@sveltejs/kit';
 
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get({ request }) {
+export const get: RequestHandler = async ({ request }) => {
 	const cookies = parse(request.headers.get('cookie') || '');
 
 	if (cookies.session_id) {
@@ -14,8 +14,8 @@ export async function get({ request }) {
 		headers: {
 			'Set-Cookie': serialize('session_id', '', {
 				path: '/',
-				expires: new Date(0),
-			}),
-		},
+				expires: new Date(0)
+			})
+		}
 	};
-}
+};

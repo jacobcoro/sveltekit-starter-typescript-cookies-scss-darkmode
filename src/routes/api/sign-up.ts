@@ -1,8 +1,8 @@
 import { createSession, getUserByEmail, registerUser } from './_db';
 import { serialize } from 'cookie';
+import type { RequestHandler } from '@sveltejs/kit';
 
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function post({ request }) {
+export const post: RequestHandler = async ({ request }) => {
 	const { email, password } = await request.json();
 	const user = await getUserByEmail(email);
 
@@ -10,15 +10,15 @@ export async function post({ request }) {
 		return {
 			status: 409,
 			body: {
-				message: 'User already exists',
-			},
+				message: 'User already exists'
+			}
 		};
 	}
 
 	// ⚠️ CAUTION: Do not store a plain password like this. Use proper hashing and salting.
 	await registerUser({
 		email,
-		password,
+		password
 	});
 
 	const { id } = await createSession(email);
@@ -30,13 +30,13 @@ export async function post({ request }) {
 				httpOnly: true,
 				sameSite: 'strict',
 				secure: process.env.NODE_ENV === 'production',
-				maxAge: 60 * 60 * 24 * 7, // one week
-			}),
+				maxAge: 60 * 60 * 24 * 7 // one week
+			})
 		},
 		body: {
 			user: {
-				email,
-			},
-		},
+				email
+			}
+		}
 	};
-}
+};
