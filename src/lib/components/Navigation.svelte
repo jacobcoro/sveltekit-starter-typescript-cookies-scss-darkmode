@@ -3,7 +3,8 @@
 	import { goto } from '$app/navigation';
 	import { sunO, moonO } from 'svelte-awesome/icons';
 	import Icon from 'svelte-awesome';
-	import { useDarkMode } from './useDarkMode';
+	import UseTheme from './UseTheme.svelte';
+	import { onMount } from 'svelte';
 	const navigation = [
 		{
 			href: '/',
@@ -14,8 +15,6 @@
 			name: `${$session.user ? '🔓' : '🔒'} Protected`
 		}
 	];
-	const { toggleTheme, theme } = useDarkMode();
-	console.log({ theme });
 
 	async function handleSignOut() {
 		await fetch('/api/sign-out');
@@ -27,13 +26,15 @@
 <header class="navigation">
 	<nav>
 		<div class="nav__items">
-			<button on:click={toggleTheme} class="theme-toggle">
-				{#if theme === 'dark'}
-					<Icon data={sunO} />
-				{:else}
-					<Icon data={moonO} />
-				{/if}
-			</button>
+			<UseTheme let:toggleTheme let:theme>
+				<button on:click={toggleTheme} class="theme-toggle">
+					{#if theme === 'dark'}
+						<Icon scale={1.2} data={sunO} />
+					{:else}
+						<Icon scale={1.2} data={moonO} />
+					{/if}
+				</button>
+			</UseTheme>
 
 			{#each navigation as link}
 				<a href={link.href}>
@@ -56,7 +57,9 @@
 		background-color: var(--secondary);
 		padding: style.$spacing * 1;
 	}
+
 	a {
+		color: white;
 		text-decoration: none;
 	}
 	.nav__items {
@@ -66,6 +69,6 @@
 	.theme-toggle {
 		display: flex;
 		align-items: center;
-		color: var(--text);
+		color: white;
 	}
 </style>

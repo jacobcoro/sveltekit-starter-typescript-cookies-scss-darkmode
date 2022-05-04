@@ -1,13 +1,11 @@
-import { onMount } from 'svelte';
+<script lang="ts">
+	import { onMount } from 'svelte';
 
-export const useDarkMode = () => {
 	// This code assumes a Light Mode default (set data-theme="light" on index.html)
-
-	let theme = '';
+	$: theme = 'light';
 
 	// find initial theme
 	onMount(() => {
-		theme = 'light';
 		if (
 			/* This condition checks whether the user has set a site preference for dark mode OR a OS-level preference for Dark Mode AND no site preference */
 			localStorage.getItem('color-mode') === 'dark' ||
@@ -32,8 +30,8 @@ export const useDarkMode = () => {
 	const toggleTheme = () => {
 		const root = document.getElementById('app-root');
 		if (!root) return;
-		setTheme(theme === 'light' ? 'dark' : 'light');
+		setTheme(root.dataset.theme === 'light' ? 'dark' : 'light');
 	};
+</script>
 
-	return { theme, toggleTheme };
-};
+<slot {theme} {toggleTheme} />
