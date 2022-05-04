@@ -28,29 +28,32 @@
 </script>
 
 <form on:submit|preventDefault={submit} class="form">
-	<Input label="Email" id="email" name="email" type="email" bind:value={email} />
-	<Input label="Password" id="password" name="password" type="password" bind:value={password} />
-	<Input
-		label="Confirm Password"
-		id="confirm-password"
-		name="confirm-password"
-		type="password"
-		bind:value={confirmPassword}
-		bind:inputRef={confirmPasswordInputRef}
-	/>
-	{#if error !== ''}
-		<p class="error">{error}</p>
-	{/if}
-	<div class="button-wrap">
-		<Button type="submit">Sign Up</Button>
+	<div class="input-section">
+		<Input label="Email" id="email" name="email" type="email" bind:value={email} />
+		<Input label="Password" id="password" name="password" type="password" bind:value={password} />
+		<Input
+			label="Confirm Password"
+			id="confirm-password"
+			name="confirm-password"
+			type="password"
+			bind:value={confirmPassword}
+			bind:inputRef={confirmPasswordInputRef}
+		/>
+		{#if error !== ''}
+			<p class="error">{error}</p>
+		{/if}
 	</div>
+	<Button type="submit">Sign Up</Button>
 </form>
 
 <style lang="scss">
+	.error {
+		color: red;
+	}
 	.form {
 		@include style.login-form;
 	}
-	.button-wrap {
-		margin-top: style.$spacing * 5;
+	.input-section {
+		margin-bottom: style.$spacing * 5;
 	}
 </style>

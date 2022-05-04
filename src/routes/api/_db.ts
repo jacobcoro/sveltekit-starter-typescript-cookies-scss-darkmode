@@ -1,7 +1,7 @@
-import type { UserSession } from 'src/types';
+import type { ServerSession, ServerUser } from 'src/types';
 import { v4 as uuidv4 } from 'uuid';
 
-const users: User[] = [
+const users: ServerUser[] = [
 	{
 		email: 'mail@example.com',
 		// ⚠️ CAUTION: Do not store a plain password like this. Use proper hashing and salting.
@@ -9,15 +9,15 @@ const users: User[] = [
 	}
 ];
 
-let sessions: UserSession[] = [];
+let sessions: ServerSession[] = [];
 
-export const getUserByEmail = async (email: string) => {
+export const getUserByEmail: (email: string) => Promise<ServerUser | null> = async (email) => {
 	const existingUser = users.find((user) => user.email === email);
 	if (!existingUser) return Promise.resolve(null);
 	return Promise.resolve(existingUser);
 };
 
-export const registerUser = (user: User) => {
+export const registerUser = (user: ServerUser) => {
 	const existingUser = users.find((u) => u.email === user.email);
 	if (existingUser) return Promise.reject(new Error('User already exists'));
 	users.push(user);
@@ -25,7 +25,7 @@ export const registerUser = (user: User) => {
 };
 
 export const createSession = (email: string) => {
-	const session = {
+	const session: ServerSession = {
 		id: uuidv4(),
 		email
 	};

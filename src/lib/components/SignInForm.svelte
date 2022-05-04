@@ -18,25 +18,25 @@
 </script>
 
 <form on:submit|preventDefault={submit} class="form">
-	<Input label="Email" id="email" name="email" type="email" bind:value={email} required />
-	<Input
-		label="Password"
-		id="password"
-		name="password"
-		type="password"
-		bind:value={password}
-		required
-	/>
-	<div class="button-wrap">
-		<Button type="submit">Sign In</Button>
+	<div class="input-section">
+		<Input label="Email" id="email" name="email" type="email" bind:value={email} required />
+		<Input
+			label="Password"
+			id="password"
+			name="password"
+			type="password"
+			bind:value={password}
+			required
+		/>
 	</div>
+	<Button type="submit">Sign In</Button>
 </form>
 
 <style lang="scss">
 	.form {
 		@include style.login-form;
 	}
-	.button-wrap {
-		margin-top: style.$spacing * 5;
+	.input-section {
+		margin-bottom: style.$spacing * 5;
 	}
 </style>

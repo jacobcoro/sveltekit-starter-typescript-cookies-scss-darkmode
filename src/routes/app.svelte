@@ -1,5 +1,7 @@
-<script context="module">
-	export async function load({ session }) {
+<script context="module" lang="ts">
+	import type { Load } from '@sveltejs/kit';
+
+	export const load: Load = async ({ session }) => {
 		if (!session?.user) {
 			return {
 				status: 302,
@@ -11,14 +13,15 @@
 				user: session.user
 			}
 		};
-	}
+	};
 </script>
 
 <script lang="ts">
-	export let user;
+	import type { User } from 'src/types';
+	export let user: User;
 
 	// import { session } from '$app/stores';
 	// $session.user;
 </script>
 
-<h1 class="text-2xl font-semibold text-center">Hi! You are registered with email {user.email}.</h1>
+<h1 class="">Hi! You are registered with email {user.email}.</h1>

@@ -2,12 +2,10 @@
 	export let type = 'button';
 </script>
 
-<button {type} class="button">
-	<slot />
-</button>
+<button {type}><slot /></button>
 
 <style lang="scss">
-	.button {
+	button {
 		@include style.button;
 	}
 </style>
