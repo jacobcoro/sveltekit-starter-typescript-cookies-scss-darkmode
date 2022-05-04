@@ -1,11 +1,11 @@
 import { createSession, getUserByEmail, registerUser } from './_db';
 import { serialize } from 'cookie';
 import type { RequestHandler } from '@sveltejs/kit';
+import type { ServerUser } from 'src/types';
 
 export const post: RequestHandler = async ({ request }) => {
-	const { email, password } = await request.json();
+	const { email, passwordHash }: ServerUser = await request.json();
 	const user = await getUserByEmail(email);
-
 	if (user) {
 		return {
 			status: 409,
@@ -15,10 +15,9 @@ export const post: RequestHandler = async ({ request }) => {
 		};
 	}
 
-	// ⚠️ CAUTION: Do not store a plain password like this. Use proper hashing and salting.
 	await registerUser({
 		email,
-		password
+		passwordHash
 	});
 
 	const { id } = await createSession(email);

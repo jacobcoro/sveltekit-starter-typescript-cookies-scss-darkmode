@@ -3,7 +3,7 @@ export interface User {
 }
 
 export interface ServerUser extends User {
-	password: string;
+	passwordHash: string;
 }
 
 export interface ServerSession {

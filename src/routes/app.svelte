@@ -1,3 +1,4 @@
+<!-- sveltekit modules run serverside before page load -->
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit';
 

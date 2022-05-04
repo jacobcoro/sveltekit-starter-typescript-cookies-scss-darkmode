@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { sunO, moonO } from 'svelte-awesome/icons';
 	import Icon from 'svelte-awesome';
-	import UseTheme from './UseTheme.svelte';
+	import UseTheme from '../helpers/UseTheme.svelte';
 	import { onMount } from 'svelte';
 	const navigation = [
 		{

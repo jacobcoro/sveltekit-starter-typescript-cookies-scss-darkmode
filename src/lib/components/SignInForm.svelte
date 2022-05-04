@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
 
-	import { createEventDispatcher } from 'svelte';
+	import { hash } from '$lib/helpers/crypto';
+	import type { ServerUser } from 'src/types';
 
 	let email = '';
 	let password = '';
@@ -10,10 +12,11 @@
 	const dispatch = createEventDispatcher();
 
 	function submit() {
-		dispatch('submit', {
+		const user: ServerUser = {
 			email,
-			password
-		});
+			passwordHash: hash(password)
+		};
+		dispatch('submit', user);
 	}
 </script>
 

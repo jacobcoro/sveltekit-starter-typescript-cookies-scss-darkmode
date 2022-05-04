@@ -1,14 +1,8 @@
+import { hashPassword } from '$lib/helpers/crypto';
 import type { ServerSession, ServerUser } from 'src/types';
 import { v4 as uuidv4 } from 'uuid';
 
-const users: ServerUser[] = [
-	{
-		email: 'mail@example.com',
-		// ⚠️ CAUTION: Do not store a plain password like this. Use proper hashing and salting.
-		password: 'thisisnotsecret'
-	}
-];
-
+const users: ServerUser[] = [];
 let sessions: ServerSession[] = [];
 
 export const getUserByEmail: (email: string) => Promise<ServerUser | null> = async (email) => {
@@ -20,7 +14,9 @@ export const getUserByEmail: (email: string) => Promise<ServerUser | null> = asy
 export const registerUser = (user: ServerUser) => {
 	const existingUser = users.find((u) => u.email === user.email);
 	if (existingUser) return Promise.reject(new Error('User already exists'));
-	users.push(user);
+	// Yes I know we have ssl etc. But this double hashing means the original password never even leaves the frontend.
+	const doubleHashedPassword = hashPassword(user.passwordHash);
+	users.push({ email: user.email, passwordHash: doubleHashedPassword });
 	return Promise.resolve(user);
 };
 

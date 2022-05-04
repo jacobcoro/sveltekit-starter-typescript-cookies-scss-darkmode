@@ -3,6 +3,8 @@
 	import Button from '$lib/components/Button.svelte';
 
 	import { createEventDispatcher } from 'svelte';
+	import type { ServerUser } from 'src/types';
+	import { hash } from '$lib/helpers/crypto';
 
 	let email = '';
 	let password = '';
@@ -20,10 +22,11 @@
 			return;
 		}
 
-		dispatch('submit', {
+		const user: ServerUser = {
 			email,
-			password
-		});
+			passwordHash: hash(password)
+		};
+		dispatch('submit', user);
 	}
 </script>
 
