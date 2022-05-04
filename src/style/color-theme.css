@@ -1,7 +1,7 @@
 /* Light Mode */
 :root[data-theme='light'] {
 	--primary: #f5841f;
-	--secondary: #795548;
+	--secondary: #7a48a8;
 	--text: #000000;
 	--text-light: #3f3f3f;
 	--bg: #e5e5e5;
@@ -13,7 +13,7 @@
 /* Dark Mode */
 :root[data-theme='dark'] {
 	--primary: #f39a4d;
-	--secondary: #7f6258;
+	--secondary: #845ea7;
 	--text: #ffff;
 	--text-light: #bbbbbb;
 	--bg: #171717;

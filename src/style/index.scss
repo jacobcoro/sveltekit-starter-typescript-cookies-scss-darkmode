@@ -11,6 +11,7 @@ $spacing: 8px;
 }
 @mixin button {
 	background-color: var(--primary);
+	color: white;
 	padding: 8 * 1px;
 	padding-left: 8 * 2px;
 	padding-right: 8 * 2px;
