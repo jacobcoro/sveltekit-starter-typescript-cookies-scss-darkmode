@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { sunO, moonO } from 'svelte-awesome/icons';
 	import Icon from 'svelte-awesome';
-	import { onMount } from 'svelte';
+	import { useDarkMode } from './useDarkMode';
 	const navigation = [
 		{
 			href: '/',
@@ -14,20 +14,8 @@
 			name: `${$session.user ? '🔓' : '🔒'} Protected`
 		}
 	];
-	let theme = '';
-	onMount(() => {
-		const root = document.getElementById('app-root');
-		theme = root?.dataset.theme ?? 'light';
-		console.log({ theme, root });
-	});
-	const handleThemeChange = () => {
-		const root = document.getElementById('app-root');
-		console.log({ theme, root });
-
-		if (!root) return;
-		theme = root?.dataset.theme ?? 'light';
-		root.dataset.theme = theme === 'dark' ? 'light' : 'dark';
-	};
+	const { toggleTheme, theme } = useDarkMode();
+	console.log({ theme });
 
 	async function handleSignOut() {
 		await fetch('/api/sign-out');
@@ -39,8 +27,12 @@
 <header class="navigation">
 	<nav>
 		<div class="nav__items">
-			<button on:click={handleThemeChange} class="theme-toggle">
-				<Icon data={sunO} />
+			<button on:click={toggleTheme} class="theme-toggle">
+				{#if theme === 'dark'}
+					<Icon data={sunO} />
+				{:else}
+					<Icon data={moonO} />
+				{/if}
 			</button>
 
 			{#each navigation as link}
@@ -72,6 +64,8 @@
 		justify-content: space-around;
 	}
 	.theme-toggle {
+		display: flex;
+		align-items: center;
 		color: var(--text);
 	}
 </style>
