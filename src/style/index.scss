@@ -19,6 +19,7 @@ $spacing: 8px;
 
 @mixin input {
 	background-color: var(--bg);
+	background-image: none;
 	border: none;
 	padding: $spacing * 1;
 	border-radius: 8px;
